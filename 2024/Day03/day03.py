@@ -17,9 +17,6 @@ def part1() -> None:
         second_num = int(operation[comma_idx+1: len(operation)-1])
         total += first_num*second_num
 
-        
-
-
     print(total)
     pass
 
@@ -32,11 +29,12 @@ def part2() -> None:
     for line in lines:
         memory += line
 
+    # Get indices of each expression of interest
     muls = list(re.finditer("mul\([0-9]+,[0-9]+\)", memory))
     enables = list(re.finditer("do\(\)", memory))
     disables = list(re.finditer("don't\(\)", memory))
     
-
+    # Create an ordering of each instruction based on their location
     instructions = [0]*len(memory)
     for a in muls:
         instructions[a.span()[0]] = a.group()
@@ -47,7 +45,7 @@ def part2() -> None:
     for a in disables:
         instructions[a.span()[0]] = 2
 
-
+    # Sum up the valid muls
     total = 0
     enabled = True
     for operation in instructions:
@@ -65,7 +63,6 @@ def part2() -> None:
                 total += first_num*second_num
     print(total)
     pass
-
 
 
 if __name__ == "__main__":
