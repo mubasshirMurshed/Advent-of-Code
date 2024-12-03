@@ -70,8 +70,7 @@ def part2_alt() -> None:
         memory = f.read()
 
     # Get indices of each expression of interest
-    instructions = list(re.finditer("mul\([0-9]+,[0-9]+\)|do\(\)|don't\(\)", memory))
-    instructions = [match.group() for match in instructions]
+    instructions = list(re.findall("mul\([0-9]+,[0-9]+\)|do\(\)|don't\(\)", memory))
 
     # Sum up the valid muls
     total = 0
