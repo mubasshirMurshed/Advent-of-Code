@@ -64,7 +64,34 @@ def part2() -> None:
     print(total)
     pass
 
+def part2_alt() -> None:
+    # Read input file
+    with open(sys.argv[1], 'r') as f:
+        memory = f.read()
+
+    # Get indices of each expression of interest
+    instructions = list(re.finditer("mul\([0-9]+,[0-9]+\)|do\(\)|don't\(\)", memory))
+    instructions = [match.group() for match in instructions]
+
+    # Sum up the valid muls
+    total = 0
+    enabled = True
+    for operation in instructions:
+        if operation == "do()":
+            enabled = True
+        elif operation == "don't()":
+            enabled = False
+        else:
+            if enabled:
+                comma_idx = operation.find(",")
+                first_num = int(operation[4:comma_idx])
+                second_num = int(operation[comma_idx+1: len(operation)-1])
+                total += first_num*second_num
+    print(total)
+    pass
+
 
 if __name__ == "__main__":
     part1()
     part2()
+    part2_alt()
