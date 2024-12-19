@@ -1,5 +1,6 @@
 import sys
 from tqdm import tqdm
+from functools import cache
 
 def part1() -> None:
     # Read input file
@@ -8,16 +9,12 @@ def part1() -> None:
     
     towels = lines[0].strip().split(", ")
     designs = [line.strip() for line in lines[2:]]
-    results = dict()
 
+    @cache
     def isPossible(design, idx):
-        if (design, idx) in results:
-            return results[(design, idx)]
-        
         # Determine if design[idx:] is possible
         if idx == len(design):
-            results[(design, idx)] = True
-            return results[(design, idx)]
+            return True
         
         for towel in towels:
             if idx == 0 and towel == design:
@@ -25,11 +22,9 @@ def part1() -> None:
             
             if idx + len(towel) <= len(design) and towel == design[idx:idx + len(towel)]:
                 if isPossible(design, idx + len(towel)):
-                    results[(design, idx)] = True
-                    return results[(design, idx)]
-        
-        results[(design, idx)] = False
-        return results[(design, idx)]
+                    return True
+
+        return False
     
     # Filter towels that can already be made of smaller towels (optimisation)
     new_towels = []
@@ -82,4 +77,4 @@ def part2() -> None:
 
 if __name__ == "__main__":
     part1()
-    part2()
+    # part2()
