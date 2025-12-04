@@ -43,6 +43,7 @@ func part2(filename string) int {
 
 func main() {
 	var filename string = "example.txt"
+	// var filename string = "input.txt"
 	fmt.Println(part1(filename))
-	fmt.Println(part2(filename))
+	// fmt.Println(part2(filename))
 }
