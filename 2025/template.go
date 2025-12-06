@@ -17,33 +17,16 @@ func part1(filename string) int {
 	// Iterate over each line
 	count := 0
 	for scanner.Scan() {
-		// Process
 		// line := scanner.Text()
 	}
 	return count
 }
 
 func part2(filename string) int {
-	// Open file
-	file, _ := os.Open(filename)
-	defer file.Close()
-
-	// Create a new Scanner for the file
-	scanner := bufio.NewScanner(file)
-
-	// Iterate over each line
-	count := 0
-	for scanner.Scan() {
-		// Process
-		// line := scanner.Text()
-
-	}
-	return count
+	return 0
 }
 
 func main() {
-	var filename string = "example.txt"
-	// var filename string = "input.txt"
-	fmt.Println(part1(filename))
-	// fmt.Println(part2(filename))
+	fmt.Println(part1(os.Args[1]))
+	// fmt.Println(part2(os.Args[1]))
 }
